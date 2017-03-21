@@ -4,6 +4,8 @@ angular.module("customer").
         var customerID;
         var getOrdersError = false;
         var getCustmerError = false;
+        var customerInfoChanged = false;
+        var customerInfoNotChanged = false;
 
         $scope.$watch(function () { return loginService.getUserId() },
             function (newValue, oldValue) {
@@ -55,7 +57,14 @@ angular.module("customer").
             };
 
             customerService.updateCustomer(customerID, updatedCustomer);
-        };
+        }.then(function (response) {
+            $scope.customerInfoChanged = true;
+            $scope.customerInfoNotChanged = false;
+        }, function (response) {
+            $scope.customerInfoChanged= false;
+            $scope.customerInfoNotChanged= true;
+        });
+        
 
 
     }]);
