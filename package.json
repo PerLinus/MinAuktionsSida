@@ -1,0 +1,14 @@
+{
+  "name": "nackademiskawebbutik",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "lite-server",
+    "postinstall": "bower install"
+  },
+  "author": "Linus Nilsson",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}

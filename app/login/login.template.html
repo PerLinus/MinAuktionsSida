@@ -1,0 +1,19 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+    <form name="form" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <label for="username">E-mail</label>
+            <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">E-mail behövs</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Lösenord</label>
+            <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Lösenord behövs</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="doLogin(username, password)">Login</button>
+            <a href="/" class="btn btn-link">Avbryt</a>
+        </div>
+    </form>
+</div>

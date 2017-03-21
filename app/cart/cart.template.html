@@ -1,0 +1,40 @@
+<div class="container" ng-controller="cartController">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th id="productTableWidth">Produkt</th>
+                    <th>Pris</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in productCart">
+                    <td>{{ product.quantity }} st {{ product.name }} <br>
+
+
+                        <div uib-collapse="!isCollapsed">
+                            <div>{{ product.description }}</div>
+                        </div>
+                    </td>
+
+                    <td>{{ product.price }} kr<br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="btn-toolbar">
+                            <button ng-disabled="!isLoggedIn" type="button" class="btn btn-inverse" ng-click="order()">Lägg order</button>
+                            <button ng-show="!isLoggedIn" type="button" class="btn btn-inverse"><a href="/login"> Logga in</a></button>
+                        </div>
+                        <p ng-show="!isLoggedIn"><b>Du behöver logga in för att kunna beställa</b></p>
+                    </td>
+                    <div ng-show="orderSuccess" class="alert alert-success alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        <strong>Tack!</strong> Din order har tagits emot!
+                    </div>
+                    <td><b>Total kostnad: {{totalKostnad}} kr</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

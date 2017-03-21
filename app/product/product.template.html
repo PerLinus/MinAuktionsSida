@@ -1,0 +1,29 @@
+<div class="container" ng-controller="cartController">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th id="productTableWidth">Produkt</th>
+                    <th>Bild</th>
+                    <th>Pris</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in products | filter:search | filter:{categoryId:categorySelected}">
+                    <td>{{ product.name }} <br>
+
+                        <button type="button" class="btn btn-inverse" ng-click="isCollapsed = !isCollapsed">Produktinformation <span class="caret"></span></button>
+                        <div uib-collapse="!isCollapsed">
+                            <div>{{ product.description }}</div>
+                        </div>
+                    </td>
+                    <td><img ng-src="{{product.imageUrl}}" alt=""></td>
+                    <td>{{ product.price }} kr<br>
+                        <button ng-disabled="product.unitsInStock == 0" type="button" class="btn btn-inverse" ng-click="addToCart(product)">Lägg i kundvagn</button>
+                        <p ng-hide="!product.unitsInStock == 0"><b>Slut i lager</b></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

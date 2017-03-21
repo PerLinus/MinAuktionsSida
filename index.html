@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nackademiska Webbutik</title>
+    <base href="/">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        
+        <script src="app/app.module.js"></script>
+        <script src="app/app.config.js"></script>
+        <script src="app/app.service.js"></script>
+        <script src="app/app.controller.js"></script>
+
+        <script src="app/category/category.module.js"></script>
+        <script src="app/category/category.service.js"></script>
+        <script src="app/category/category.controller.js"></script>
+
+        <script src="app/product/product.module.js"></script>
+        <script src="app/product/product.service.js"></script>
+        <script src="app/product/product.controller.js"></script>
+
+        <script src="app/cart/cart.module.js"></script>
+        <script src="app/cart/cart.service.js"></script>
+        <script src="app/cart/cart.controller.js"></script>
+
+        <script src="app/login/login.module.js"></script>
+        <script src="app/login/login.service.js"></script>
+        <script src="app/login/login.controller.js"></script>
+
+        <script src="app/newCustomer/newCustomer.module.js"></script>
+        <script src="app/newCustomer/newCustomer.service.js"></script>
+        <script src="app/newCustomer/newCustomer.controller.js"></script>
+
+        <script src="app/customer/customer.module.js"></script>
+        <script src="app/customer/customer.service.js"></script>
+        <script src="app/customer/customer.controller.js"></script>
+
+
+</head>
+
+<body ng-app="app" ng-controller="productController">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/" ng-click="selectedCategory(0)">Nackademiska Webbutik</a>
+            </div>
+
+   
+            <ul class="nav navbar-nav">
+                <li span uib-dropdown on-toggle="toggled(open)" auto-close="outsideClick"><a href id="dropdown1" uib-dropdown-toggle>Kategorier <span class="caret"></span></a>
+                    <ul ng-controller="categoryController" uib-dropdown-menu aria-labelledby="simple-dropdown" class="dropdown-menu">
+                        <li ng-click="selectedCategory(category)" id="dropdown" class="list-group-item" ng-repeat="category in categories"><a class="btn">{{ category.name }}</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+
+
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" ng-model="search" class="form-control" placeholder="Sökruta">
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav">
+                <li span uib-dropdown on-toggle="toggled(open)" auto-close="outsideClick"><a href id="dropdown2" uib-dropdown-toggle>Kundvagn <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                <ul ng-controller="cartController" uib-dropdown-menu aria-labelledby="dropdown2" class="dropdown-menu">
+                    <li id="dropdown" class="list-group-item" ng-repeat="product in productCart track by $index"><span class="btn">{{ product.quantity + "st " + product.name + " " + product.price }} kr 
+                        <button id="test" ng-click="removeFromCart($index)" class="btn btn-primary btn-xs glyphicon glyphicon-remove"></button></span></li>
+                    <li id="dropdown" class="list-group-item"><a class="btn" href="/cart" ng-click="totaltPrice()">Gå till kundvagn</a></li>
+
+                </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-hide="isLoggedIn"><a href="/newCustomer"><span class="glyphicon glyphicon-user"></span> Skapa konto</a></li>
+                <li ng-hide="isLoggedIn"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logga in</a></li>
+                <li ng-show="isLoggedIn"><a href="/customer"><span class="glyphicon glyphicon-log-in"></span> Kundsida</a></li>
+                <li ng-show="isLoggedIn"><a ng-click="logOut()" href="/"><span class="glyphicon glyphicon-log-in"></span> Logga ut</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="ng-view" ng-view></div>
+
+    <footer class="navbar navbar-inverse navbar-fixed-bottom">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-offset-5 col-xs-2 text-center">
+                    <p class="navbar-text">&copy; 2017</p>
+                </div>
+                <div class="col-xs-5"></div>
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

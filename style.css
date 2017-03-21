@@ -1,0 +1,25 @@
+img {
+    width: 150px;
+    height: 200px;
+
+}
+#ng-view {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+#dropdown {
+    background-color: lightgrey;
+}
+
+#productTableWidth {
+    width: 600px;
+}
+#test {
+     position: absolute;
+     right: 4px;
+     top: 14px;
+    
+}
+#customerCreate { 
+    margin-bottom: 200px;
+}
