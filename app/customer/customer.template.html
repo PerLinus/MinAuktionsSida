@@ -59,8 +59,8 @@
                     <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="updateCustomer()">Uppdatera informationen</button><a
                         href="/" class="btn btn-link">Avbryt</a>
                 </div>
-                <b class="alert alert-success" ng-show="customerInfoChanged">Användare skapad!</b>
-                <b class="alert alert-danger" ng-show="customerInfoNotChanged">Lyckades inte skapaanvändare!</b>
+                <b class="alert alert-success" ng-hide="customerInfoChanged">Användare skapad!</b>
+                <b class="alert alert-danger" ng-hide="customerInfoNotChanged">Lyckades inte skapaanvändare!</b>
             </form>
 
         </div>
