@@ -1,11 +1,10 @@
 angular.module("customer").
-    controller("customerController", ["$scope", "$location", "customerService", "loginService", function ($scope, $location, customerService, loginService) {
+    controller("customerController", ["$scope", "$location", "customerService", "loginService", "productService", function ($scope, $location, customerService, loginService, productService) {
 
         var customerID;
         var getOrdersError = false;
         var getCustmerError = false;
-        var customerInfoChanged = false;
-        var customerInfoNotChanged = false;
+        $scope.totalPrice = 0;
 
         $scope.$watch(function () { return loginService.getUserId() },
             function (newValue, oldValue) {
@@ -21,7 +20,6 @@ angular.module("customer").
                     $scope.city = customer.city;
                 }, function error(response) {
                     getCustmerError = true;
-                    console.log(getCustmerError);
                 });
             });
 
@@ -31,9 +29,19 @@ angular.module("customer").
                 customerService.getOrders(newValue).then(function success(response) {
                     customerOrders = response.data;
                     $scope.orders = customerOrders;
+                    angular.forEach(customerOrders, function(order) {
+                        console.log(order);
+                        var arrayOfProducts = order.products;
+                        angular.forEach(arrayOfProducts, function(product) {
+                            productService.getProduct(product.productId).then(function(response) {
+                                var productPrice = response.data;
+                                $scope.totalPrice += productPrice.price;
+                            })
+                        })
+                        
+                    })
                 }, function error(response) {
                     getOrdersError = true;
-                    console.log(getOrdersError);
                 });
             });
 
@@ -57,14 +65,7 @@ angular.module("customer").
             };
 
             customerService.updateCustomer(customerID, updatedCustomer);
-        }.then(function (response) {
-            $scope.customerInfoChanged = true;
-            $scope.customerInfoNotChanged = false;
-        }, function (response) {
-            $scope.customerInfoChanged= false;
-            $scope.customerInfoNotChanged= true;
-        });
-        
+        };
 
 
     }]);

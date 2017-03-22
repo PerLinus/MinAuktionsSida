@@ -5,7 +5,7 @@
         <div class="col-sm-3">
             <ul ng-repeat="order in orders" class="list-group">
                 <li class="list-group-item"> {{ order.id }} </li>
-
+                <b> {{ totalPrice }} </b>
             </ul>
         </div>
         <div class="col-sm-9">
@@ -59,8 +59,6 @@
                     <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="updateCustomer()">Uppdatera informationen</button><a
                         href="/" class="btn btn-link">Avbryt</a>
                 </div>
-                <b class="alert alert-success" ng-hide="customerInfoChanged">Användare skapad!</b>
-                <b class="alert alert-danger" ng-hide="customerInfoNotChanged">Lyckades inte skapaanvändare!</b>
             </form>
 
         </div>
