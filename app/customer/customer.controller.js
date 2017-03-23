@@ -1,10 +1,19 @@
 angular.module("customer").
     controller("customerController", ["$scope", "$location", "customerService", "loginService", "productService", function ($scope, $location, customerService, loginService, productService) {
 
+        var customerOrders;
+        var allProducts;
+        var orderValue;
+        var linus = [];
+
+
         var customerID;
         var getOrdersError = false;
         var getCustmerError = false;
-        $scope.totalPrice = 0;
+
+
+
+
 
         $scope.$watch(function () { return loginService.getUserId() },
             function (newValue, oldValue) {
@@ -28,18 +37,24 @@ angular.module("customer").
             function (newValue, oldValue) {
                 customerService.getOrders(newValue).then(function success(response) {
                     customerOrders = response.data;
-                    $scope.orders = customerOrders;
-                    angular.forEach(customerOrders, function(order) {
-                        console.log(order);
-                        var arrayOfProducts = order.products;
-                        angular.forEach(arrayOfProducts, function(product) {
-                            productService.getProduct(product.productId).then(function(response) {
-                                var productPrice = response.data;
-                                $scope.totalPrice += productPrice.price;
+                    customerOrders.totalPrice = 0;
+                    productService.getProducts().then(function (response) {
+                        allProducts = response.data;
+                        angular.forEach(customerOrders, function (order) {
+                            angular.forEach(order, function (products) {
+                                products.orderPrice = 0;
+                                angular.forEach(allProducts, function (product) {
+                                    angular.forEach(products, function (productInfo) {
+                                        if (productInfo.productId == product.id) {
+                                            products.orderPrice += (productInfo.quantity * product.price);
+                                            customerOrders.totalPrice += (productInfo.quantity * product.price);
+                                        }
+                                    })
+                                })
                             })
                         })
-                        
                     })
+                    $scope.orders = customerOrders;
                 }, function error(response) {
                     getOrdersError = true;
                 });

@@ -3,9 +3,9 @@
 
     <div class="row">
         <div class="col-sm-3">
+            <li class="list-group-item"> Totalt ordervärde: {{ orders.totalPrice }} kr  </li><br>
             <ul ng-repeat="order in orders" class="list-group">
-                <li class="list-group-item"> {{ order.id }} </li>
-                <b> {{ totalPrice }} </b>
+                <li class="list-group-item"> OrderNr {{ order.id }} </li>     
             </ul>
         </div>
         <div class="col-sm-9">
