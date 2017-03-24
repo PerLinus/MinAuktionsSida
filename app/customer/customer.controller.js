@@ -81,6 +81,9 @@ angular.module("customer").
 
             customerService.updateCustomer(customerID, updatedCustomer);
         };
+         $scope.orderClicked = function (id) {
+                $location.path("/customer/" + id);
+            }
 
 
     }]);

@@ -20,6 +20,10 @@ angular.module("app")
         templateUrl: "app/customer/customer.template.html",
         controller: "customerController"
     })
+    .when("/customer/:orderId", {
+        templateUrl: "app/order/order.template.html",
+        controller: "orderController"
+    })
     .otherwise("/");
     $locationProvider.html5Mode(true);
 }]);

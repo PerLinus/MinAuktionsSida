@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Orderinformation för order: {{orderId}}</h2>
+  <p>Orderdatum: {{orderDate | date: "dd.MM.y"}}</p>           
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="col-sm-6">Produkt</th>
+        <th class="col-sm-2">Antal</th>
+        <th class="col-sm-2">Pris</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="order in orders">
+        <td>{{order.name}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.price}} kr</td>
+      </tr>
+    </tbody>
+  </table>
+  <back-button-component></back-button-component>
+</div>
