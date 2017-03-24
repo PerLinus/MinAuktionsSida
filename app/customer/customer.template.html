@@ -3,9 +3,9 @@
 
     <div class="row">
         <div class="col-sm-3">
-            <li class="list-group-item"> Totalt ordervärde: {{ orders.totalPrice }} kr  </li><br>
+            <li class="list-group-item"> Totalt ordervärde: {{ orders.totalPrice }} kr </li><br>
             <ul ng-repeat="order in orders" class="list-group" ng-click="orderClicked(order.id)">
-                <li class="list-group-item btn"> OrderNr {{ order.id }} </li>     
+                <li class="list-group-item btn"> OrderNr {{ order.id }} </li>
             </ul>
         </div>
         <div class="col-sm-9">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.phone.$touched && form.phone.$invalid }">
                     <label for="phone">Telefonnummer</label>
-                    <input type="number" name="phone" id="phone" class="form-control" ng-model="phone" required />
+                    <input type="text" name="phone" id="phone" class="form-control" ng-model="phone" required />
                     <span ng-show="form.phone.$touched && form.phone.$invalid" class="help-block">Telefonnummer behövs</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.password.$touched && form.password.$invalid }">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.postalCode.$touched && form.postalCode.$invalid }">
                     <label for="postalCode">Postnummer</label>
-                    <input type="number" name="postalCode" id="postalCode" class="form-control" ng-model="postalCode" required />
+                    <input type="text" name="postalCode" id="postalCode" class="form-control" ng-model="postalCode" required />
                     <span ng-show="form.postalCode.$touched && form.postalCode.$invalid" class="help-block">Postnummer behövs</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.city.$touched && form.city.$invalid }">
@@ -60,7 +60,12 @@
                     <back-button-component></back-button-component>
                 </div>
             </form>
-
+            <div ng-show="infoChangeSuccess" class="alert alert-success alert-dismissable">
+                <strong>Tack!</strong> Din information har ändrats!
+            </div>
+            <div ng-show="infoChangeFaild" class="alert alert-danger alert-dismissable">
+                <strong>Tyvärr</strong> Din information har inte kunnat ändras!
+            </div>
         </div>
     </div>
 </div>

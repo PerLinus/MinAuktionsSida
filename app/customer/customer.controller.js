@@ -79,11 +79,16 @@ angular.module("customer").
 
             };
 
-            customerService.updateCustomer(customerID, updatedCustomer);
-        };
-         $scope.orderClicked = function (id) {
+            customerService.updateCustomer(customerID, updatedCustomer).then(function success(response) {
+                $scope.infoChangeSuccess = true;
+            }, function error(response) {
+                $scope.infoChangeFaild = true;
+            });
+
+            $scope.orderClicked = function (id) {
                 $location.path("/customer/" + id);
             }
-
+        }
 
     }]);
+

@@ -1,6 +1,7 @@
 angular.module("order").
     controller("orderController", ["$scope", "$routeParams", "orderService", "productService", function ($scope, $routeParams, orderService, productService) {
         var orders = [];
+        var totalOrderPrice = 0;
         
         orderService.getOrder($routeParams.orderId).then(function (response) {
             var order = response.data;
@@ -12,6 +13,7 @@ angular.module("order").
                         angular.forEach(products, function(product) {
                             angular.forEach(allProducts, function(allProduct) {
                                 if(product.productId == allProduct.id) {
+                                    totalOrderPrice += allProduct.price * product.quantity;
                                 var orderProduct = {
                                     name : allProduct.name,
                                     price : allProduct.price,
@@ -27,7 +29,7 @@ angular.module("order").
                         })
                     })
                     
-
+                    $scope.orderCost = totalOrderPrice;
                     $scope.orders = orders;
             })
         })
