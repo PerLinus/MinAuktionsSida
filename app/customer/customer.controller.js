@@ -85,9 +85,9 @@ angular.module("customer").
                 $scope.infoChangeFaild = true;
             });
 
-            $scope.orderClicked = function (id) {
-                $location.path("/customer/" + id);
-            }
+        }
+        $scope.orderClicked = function (id) {
+            $location.path("/customer/" + id);
         }
 
     }]);
